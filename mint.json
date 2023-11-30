@@ -33,7 +33,7 @@
   "navigation": [
     {
       "group": "",
-      "pages": ["About", "Architecture", "Case Studies"]
+      "pages": ["About", "Architecture"]
     }
   ],
   "footerSocials": {
