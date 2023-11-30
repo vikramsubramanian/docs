@@ -1,5 +1,5 @@
 ---
-title: 'Architecture'
+title: 'How does Mayil work?'
 description: ''
 ---
 
@@ -16,16 +16,19 @@ A project's codebase from a git provider and documentation from various sources 
 
 This is a one time step that is done before the system is deployed and can take anywhere from 20 minuits to 2 hours.
 
-Custom data ingestion interfaces can be easily built for company specific data sources such as custom wikis, databases, etc.
+Custom data ingestion interfaces can be easily built for company specific data sources such as custom wikis, databases, etc. Please contact us to learn more.
 
 
 <img height="400" src="images/offlineindexing.png" />
 
 ## Online Inference
 
-Once the knowledge index is built, Mayil is ready to run.
+Once the knowledge index is built, Mayil is ready to run! Mayil interfaces with your team's issue tracking and runs whenever a new ticket is created.
 
-Mayil interfaces with the teams issue tracking
+It uses the information in the ticket to understand the issue and uses AI to come up with potential solutions and helpful hints.
+
+Mayil then pushes these changes as comments to the ticket.
+
 
 
 
@@ -34,4 +37,13 @@ Mayil interfaces with the teams issue tracking
 ## Mayil's Information Retreival Architecture
 
 
+
+
 <img height="400" src="images/irarchitecture.png" />
+
+
+
++ Mayil **does not train or fine-tune** foundational models. It simply uses them as tool for semantic understanding and natural language processing.
++ Mayil has a custome code ingestion mechanism that builds an abstract syntax tree of the code and indexes data using the AST to create logically indepenednt knowledge units.
++ Reindexing of data needs to be done regularly to keep the knowledge index up to date. This is automatically done.
+
