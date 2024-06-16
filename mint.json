@@ -36,7 +36,7 @@
   "navigation": [
     {
       "group": "",
-      "pages": ["about", "Architecture"]
+      "pages": ["About", "Architecture"]
     }
   ],
   "footerSocials": {
