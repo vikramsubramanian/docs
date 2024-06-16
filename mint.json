@@ -8,7 +8,7 @@
   "metadata": {
     "og:image": "/logo/4kmayil.png",
     "og:site_name": "Mayil AI",
-    "og:description": "Multi-Agent AI tool that works with your code, documentation and issue tracker to automatically propose solutions"
+    "og:description": "Solve tickets faster. Without changing the way you work"
   },
   "favicon": "/logo/4kmayil.png",
   "colors": {
@@ -26,7 +26,7 @@
   "topbarLinks": [
     {
       "name": "Talk to us",
-      "url": "mailto:vnsubram@uwaterloo.ca"
+      "url": "mailto:vikram@mayil.ai"
     }
   ],
   "topbarCtaButton": {
@@ -36,7 +36,7 @@
   "navigation": [
     {
       "group": "",
-      "pages": ["About", "Architecture"]
+      "pages": ["about", "Architecture"]
     }
   ],
   "footerSocials": {
