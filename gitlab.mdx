@@ -1,0 +1,23 @@
+---
+title: Installing Mayil's GitLab integration
+---
+
+Follow these steps to link GitLab to a deployed Mayil instance
+
+## 1. Install Mayil-bot on GitLab
+
+Mayil is installed at the Group level. To learn more, see [docs.gitlab.com/integration](https://docs.gitlab.com/ee/integration/oauth_provider.html#create-a-group-owned-application).
+
+1. Go to the desired group.
+2. On the left sidebar, select `Settings` > `Applications`.
+3. Select 'Add new application`
+3. Enter 'Mayil-bot' under Name.
+4. Under URI, enter `<mayil-deployment>/gitlab/auth` where `<mayil-deployment>` is the url in which your mayil deployment can be found (such as `mayil.examplecompany.com` or `companyname.mayil.ai`)
+5. Select only the `read_repository` OAuth 2 scope.
+6. Select Save application. GitLab provides:
+    - The OAuth 2 Client ID in the Application ID field.
+    - The OAuth 2 Client Secret, accessible by selecting Copy in the Secret field.
+    - The Renew secret function
+
+## 2. Authenticate Mayil's backend with
+

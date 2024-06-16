@@ -37,6 +37,10 @@
     {
       "group": "",
       "pages": ["About", "Architecture"]
+    },
+    {
+      "group": "Integrations",
+      "pages": ["gitlab"]
     }
   ],
   "footerSocials": {
