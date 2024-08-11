@@ -33,14 +33,29 @@
     "name": "GitHub",
     "url": "https://github.com/orgs/Mayil-AI/repositories"
   },
+  "tabs": [
+    {
+      "name": "Sandbox",
+      "url": "sandbox"
+    },
+    {
+        "name": "Self Hosting",
+        "url": "selfhosting"
+    }
+],
   "navigation": [
     {
       "group": "",
-      "pages": ["About", "Architecture"]
+      "pages": ["selfhosting/Overview", "sandbox/About"]
+    },
+    {
+      "group": "Installation",
+      "pages": [ "selfhosting/Installation_with_Helm", "selfhosting/configuration"]
     },
     {
       "group": "Integrations",
-      "pages": ["gitlab"]
+      "pages": ["selfhosting/gitlab"]
+
     }
   ],
   "footerSocials": {

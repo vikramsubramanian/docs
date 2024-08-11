@@ -1,0 +1,117 @@
+---
+title: "Installing Mayil AI with Helm"
+sidebarTitle: "Helm"
+---
+
+Helm uses a packaging format called charts. A chart is a collection of files that describe a related set of Kubernetes resources. Talk to us get a custom made chart to install Mayil (with configuration details unique to your installation).
+
+
+## Prerequisites
+
+1. [Install Helm CLI](https://helm.sh/docs/intro/install/)
+2. Create a Kubernetes cluster and setup Kubectl to that cluster
+3. A subdomain to host Mayil
+3. Receive a custom Helm chart from us
+
+
+
+
+## Setup HTTPS ingress
+
+We will use cert-manager- [github.com/cert-manager/cert-manager](https://github.com/cert-manager/cert-manager)
+
+
+Add the Jetstack chart -
+
+```
+helm repo add jetstack https://charts.jetstack.io
+```
+
+Setup cert-manager -
+
+```
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.3/cert-manager.crds.yaml
+```
+
+
+
+```
+helm install cert-manager jetstack/cert-manager --namespace default --version v1.13.3
+```
+
+## Configuring Helm
+
+You should have received a zip file from us containing a `.tgz` file. This is the helm chart. And a `values.yaml` with configuation options for Helm. Update these values-
+
+1. `ingress.hosts.host`- The subdomain where Mayil will be hosted such as `mayil.companyname.com`
+2. `envVars.LINK_TO_MAYIL` - The same subdomain as in `ingress.hosts.host`
+3.  `certManager.email`- The email through which HTTPS certificates will be issued. No account set up or configuration is required. This is simply for record keeping by the certificate issuer.
+
+`values.yaml` contains sensitive information. Please keep it safe. Save `envVars.CLIENT_ID` and `envVars.CLIENT_SECRET` as this will be the default username and password for Vault (used to configure Mayil)
+
+
+## Installing Milvus
+
+```
+helm install mayil <path to helm chart> -f values.yaml
+```
+
+The helm chart should be in the installation package you receives as a `.tgz` file.
+
+## Check cluster status
+
+Investigate all the pods are running with-
+
+```
+kubectl get pods
+```
+
+A successfull intall should look like this-
+
+```
+kubectl get pods
+
+NAME                                       READY   STATUS    RESTARTS        AGE
+cert-manager-57688f5dc6-8swv5              1/1     Running   0               4d20h
+cert-manager-cainjector-d7f8b5464-qjclc    1/1     Running   0               4d20h
+cert-manager-webhook-58fd67545d-bjwxb      1/1     Running   0               4d20h
+mayil-etcd-0                               1/1     Running   0               4d20h
+mayil-milvus-standalone-658467cb8d-pmjlb   1/1     Running   0               4d20h
+mayil-minio-8cd9dd77c-9mkfd                1/1     Running   0               4d20h
+mayil-redis-master-0                       1/1     Running   0               4d18h
+mayil-vault-0                              1/1     Running   0               4d20h
+mayilserver-app-878dc876f-47ch9            1/1     Running   0               4d20h
+node-services-9c75474d9-8zb2r              1/1     Running   0               4d20h
+```
+
+
+Investigate ingress with-
+
+```
+kubectl get ingress
+```
+
+A successfull intall should look like this-
+
+```
+kubectl get ingress
+
+NAME            CLASS   HOSTS           ADDRESS          PORTS     AGE
+mayil-ingress   nginx   aug5.mayil.ai   172.214.14.253   80, 443   4d20h
+```
+
+The IP adress under `ADDRESS` is the IP address Mayil is connected to. We will link this IP to our subdomain in the next step
+
+
+## Connect subdomain
+
+Setup a DNS A record with your domain provider such as the example below using the information from runnning `kubectl get ingress` from the previous step-
+
+```
+Host name - aug5.mayil.ai
+Value - 172.214.14.253
+TTL - 30 Minutes
+```
+			
+
+
