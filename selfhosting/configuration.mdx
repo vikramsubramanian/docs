@@ -3,4 +3,112 @@ title: "Configuring Mayil"
 sidebarTitle: "Configuration"
 ---
 
-Various integrations and resources need to be set up for Mayil to be fully functional. All  
+Various integrations and resources need to be set up for Mayil to be fully functional. All configurations are made through [Hashicorp Vault](https://www.vaultproject.io/), a secret management tool running on the deployment we just installed.
+
+## Using Vault
+
+Vault should run on the base domain we deployed Mayil to in the previous step (such as `mayil.companyname.com`). When opened for the first time, you should see a login page like this-
+![Vault Login](./selfhosting/vaultlogin.png)
+
+We will use the `username` method to login. Use `envVars.CLIENT_ID` and `envVars.CLIENT_SECRET` provided in `values.yaml` in the helm installation package you received from us. 
+
+Please update this default username and password after logging in. Vault supports most popular methods including GitHub, LDAP, AppRole, and more. See [here](https://developer.hashicorp.com/vault/docs/concepts/auth).
+
+
+Once logged-in, under `Secrets Engine`, open mayil ➤ data ➤ user_config. You should see something like this-
+
+![Edit Mayil's config](./selfhosting/vaultsecrets.png)
+
+This file contains all the configuation options for Mayil. When installing integrations, this file will have to be modified with details about that integration. Every time this file gets updated, Mayil will refresh. 
+
+
+# Verifying config values
+
+Go to `<deployment>/api/health` (such as `https://mayil.companyname.com/api/health) to see the status of the c
+
+
+## Sample configurtion
+
+Here is a sample config file-
+
+```
+{
+  "data": {
+    "ENABLED": true,
+    "ENDPOINTS": [
+      {
+        "deployment": "4Turbo1106",
+        "deployment_type": "azure_oai",
+        "endpoint": "https://mayil-ai.openai.azure.com/",
+        "key": "GPT4",
+        "token": "<TOKEN>"
+      },
+      {
+        "deployment": "35Turbo1106",
+        "deployment_type": "azure_oai",
+        "endpoint": "https://mayil-ai.openai.azure.com/",
+        "key": "GPT3",
+        "token": "<TOKEN>"
+      },
+      {
+        "deployment": "GPT4O",
+        "deployment_type": "azure_oai",
+        "endpoint": "https://mayilus.openai.azure.com/",
+        "key": "GPT4O",
+        "token": "<TOKEN>"
+      },
+      {
+        "deployment": "embedding",
+        "deployment_type": "azure_oai",
+        "endpoint": "https://mayil-ai.openai.azure.com/",
+        "key": "EMBEDDING",
+        "token": "<TOKEN>"
+      }
+    ],
+    "EXTERNAL_DOCUMENTATION_SOURCES": [""],
+    "GIT_REPOS": [
+      {
+        "git_url": "https://github.com/ORGNAME/REPONAME",
+        "repo_name": "ORGNAME/REPONAME",
+        "repo_summary": "Small python program to calculate the area of different shapes",
+        "tags": [],
+        "tracker_ids": [
+          "My Kanban Project"
+        ]
+      }
+    ],
+    "INTEGRATIONS": [
+      {
+        "integration_type": "github",
+        "identifier": "962458",
+        "organization_id": "Mayil-AI",
+        "secret": "<BASE64_ENCODED_PRIVATE_KEY",
+        "url": "https://github.com",
+        "valid_ids": [
+          "11111111",
+          "22222222",
+        ],
+        "webhook_secret": "<CUSTOM SECRET>"
+      },
+      {
+        "integration_type": "jira",
+        "identifier": "Q1oS2hfmQugWAOJ2rxZr208xeMumFTwZ",
+        "ignore_labels": [
+          "mayil_norun",
+          "test_issue"
+        ],
+        "project": "My Kanban Project",
+        "secret": "<JIRA SECRET>",
+        "url": "https://mayiltest.atlassian.net",
+        "webhook_secret": "<WEBHOOK SECRET>"
+      }
+    ],
+    "TELEMETRY_LEVEL": "standard"
+  },
+  "options": {},
+}
+```
+
+## Basic Configuration options
+
+
