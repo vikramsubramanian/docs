@@ -2,3 +2,10 @@
 title: Overview
 ---
 
+Mayil is designed to be fully self-hosted. All data Mayil processes will be stored within the self hosted instance.
+
+Mayil consists of an API Backend and various integrations that work with the API backend. Setting up mayil involves three major steps-
+
+1. **Installing the API Backend**- Mayil's API Backend is a Kubernetes application. It can be installed on any kubernetes cluster either self-hosted or on the cloud.
+2. **Configuration**- Mayil's API Backend needs to know important details like where to run, what to process, how to access integrations, etc. This information needs to be provided through Vault, a secret management software Mayil uses.
+3. **Integrations**- Mayil interacts with the world through integrations. At the minimum, it needs access to an issue-tracker and a code repository. Supported integrations need to be set up and linked to Mayil's API Backend.

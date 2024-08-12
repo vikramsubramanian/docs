@@ -54,7 +54,7 @@
     },
     {
       "group": "Integrations",
-      "pages": ["selfhosting/gitlab"]
+      "pages": ["selfhosting/gitlab", "selfhosting/openai", "selfhosting/github", "selfhosting/jira"]
 
     }
   ],
