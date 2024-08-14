@@ -15,7 +15,7 @@ We will use the `username` method to login. Use `envVars.CLIENT_ID` and `envVars
 Please update this default username and password after logging in. Vault supports most popular methods including GitHub, LDAP, AppRole, and more. See [here](https://developer.hashicorp.com/vault/docs/concepts/auth).
 
 
-Once logged-in, under `Secrets Engine`, open mayil ➤ data ➤ user_config. You should see something like this-
+Once logged in, under `Secrets Engine`, open mayil ➤ data ➤ user_config. You should see something like this-
 
 ![Edit Mayil's config](/selfhosting/vaultsecrets.png)
 
@@ -24,12 +24,12 @@ This file contains all the configuation options for Mayil. When installing integ
 
 # Verifying config values
 
-Go to `<deployment>/api/health` (such as `https://mayil.companyname.com/api/health) to see the status of the configuration. Any errors in the config will also be listed there. When config is valid, you will see somehting like-
+Go to `<deployment>/api/health` (such as `https://mayil.companyname.com/api/health) to see the status of the configuration. Any errors in the config will also be listed there. When config is valid, you will see something like-
 
 ![Valid Config](/selfhosting/validconfig.png)
 
 
-## Sample configurtion
+## Sample configuration
 
 Here is a sample config file-
 
@@ -117,11 +117,11 @@ Here is a sample config file-
 1. `ENDPOINTS`- See [OpenAI](./openai)
 
 1.  `EXTERNAL_DOCUMENTATION_SOURCES` takes a list of strings, each pointing to a documentation source that could be relevant to Mayil. 
-        For isntance, if you are setting up Mayil to work for a project that is a Java Spring app, then the Spring documetnation would be relevant. The more relevant documentation Mayil has access to, the more knowledgable it becomes. 
+        For instance, if you are setting up Mayil to work for a project that is a Java Spring app, then the Spring documentation would be relevant. The more relevant documentation Mayil has access to, the more knowledgeable it becomes. 
         
         For now, `EXTERNAL_DOCUMENTATION_SOURCES` should be a subset of `["Shopify", "eslint", "spring"]`. Please leave blank if there are no relevant sources.
 
-        These documentation sources need to be set up by the Mayil team. Please reach out to us if you would like a new soure.
+        These documentation sources need to be set up by the Mayil team. Please reach out to us if you would like a new source.
 
 
 1.  `TELEMETRY_LEVEL` can be one of `[ "minimal", "standard", "verbose"]`.

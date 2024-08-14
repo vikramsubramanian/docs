@@ -9,7 +9,7 @@ sidebarTitle: "OpenAI on Azure"
 
 This tutorial assumes you have an Azure account and have installed the Azure CLI app. Follow this tutorial to install the Azure CLI app- [here](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 
-Your azure account must have a Cognitive Services Contributor role assigned in order for you to agree to the responsible AI terms and create a resource- [Learn More](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/role-based-access-control)
+Your Azure account must have a Cognitive Services Contributor role assigned in order for you to agree to the responsible AI terms and create a resource- [Learn More](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/role-based-access-control)
 
 ## Provision OpenAI resources on Azure
 
@@ -36,7 +36,7 @@ Skip this step if already created during Kubernetes setup.
 az cognitiveservices account create --kind OpenAI --location eastus --name mayil-cs-eastus --resource-group mayil-rg --sku s0
 ```
 
-We have selected the region based on availability of OpenAI models. See [here](https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits)
+We have selected the region based on the availability of OpenAI models. See [here](https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits)
 
 4. Deploy required models for Mayil
 
@@ -82,7 +82,7 @@ It is critical to set up all the listed models for a fully functioning Mayil. Pr
 
 ## Configuring Mayil's backend API
 
-Various details generated during the setup process above will need to be copied and provided to Mayil's backend API as configuation details. Update the JSON block below with all the procured information. 
+Various details generated during the setup process above will need to be copied and provided to Mayil's backend API as configuration details. Update the JSON block below with all the procured information. 
 
 ```
     "ENDPOINTS": [
@@ -112,12 +112,12 @@ Various details generated during the setup process above will need to be copied 
 
 
 
-If the variables names provided in the commands in the previous step were used as is, few modifications need to be made to the config.
+If the variable names provided in the commands in the previous step were used as is, few modifications need to be made to the config.
 
 1. `deployment` - Enter the deployment-name used while creating the service in Azure
 2. `endpoint` - A link to the resource group we created - `https://<resource_group_name>.openai.azure.com/`
 3. `deployment_type` is always "azure_oai" for Azure OpenAI endpoints
-4. `key` - A identifier used by Mayil. Can be one of ["GPT4O", "EMBEDDING", "GPT3"]
+4. `key` - AN identifier used by Mayil. Can be one of ["GPT4O", "EMBEDDING", "GPT3"]
 5.  `token` - Procure a bearer token  by running this command-
 
 ```
@@ -128,4 +128,4 @@ After populating the config details, add this config block to `ENDPOINTS` as out
 
 ## Access Control
 
-It is critical to manage access to these endpoints from a privacy and security point of view. It is strongly recomended that these endpoints be configured to only be accessible from a company only subnet. Details on how to do this is documented [here](https://learn.microsoft.com/en-us/azure/ai-services/cognitive-services-virtual-networks?tabs=azure-cli)
+It is critical to manage access to these endpoints from a privacy and security point of view. It is strongly recommended that these endpoints be configured to only be accessible from a company-only subnet. Details on how to do this is documented [here](https://learn.microsoft.com/en-us/azure/ai-services/cognitive-services-virtual-networks?tabs=azure-cli)

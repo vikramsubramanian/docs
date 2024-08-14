@@ -11,7 +11,7 @@ Mayil's Jira integration consists of a OAuth 2.0 app and a webhook. The general 
 
 ## Prerequisites
 
-1. Admin access tp Jira
+1. Admin access to Jira
 2. Enable OAuth 2.0 in the [developer console](https://developer.atlassian.com/cloud/confluence/oauth-2-3lo-apps/#:~:text=app%20using%20the-,developer%20console,-.)
 
 
@@ -30,7 +30,7 @@ Mayil's Jira integration consists of a OAuth 2.0 app and a webhook. The general 
 
 ![Add new authorization](/selfhosting/jira_add_auth.png)
 
-5. You will now be prompted to enter a callback url. Enter `<deploment>/api/callback/jira/` where deployment is where Mayil's backend API was deployed (An example would be `https://mayil.companyname/api/callback/jira/`)
+5. You will now be prompted to enter a callback URL. Enter `<deploment>/api/callback/jira/` where deployment is where Mayil's backend API was deployed (An example would be `https://mayil.companyname/api/callback/jira/`)
 
 6. Add API authorizations by clicking this button- 
 
@@ -53,7 +53,7 @@ Go to Settings and select Change avatar. Update it to the image provided in the 
 
 ## Configuring Mayil's backend API
 
-Various details generated during the setup process will need to be copied and provided to Mayil's backend API as configuation details. Update this JSON block with all the procured information-
+Various details generated during the setup process will need to be copied and provided to Mayil's backend API as configuration details. Update this JSON block with all the procured information-
 
 ```
 {
@@ -69,7 +69,7 @@ Various details generated during the setup process will need to be copied and pr
 
 
 1. Go to Settings for your new created OAuth app and copy `Client ID` into `identifier`  and copy `secret` into `secret`.
-2. Identify the URL in which Jira runs and save that under url (e.g `https://mayiltest.atlassian.net`)
+2. Identify the URL in which Jira runs and save that under URL (e.g `https://mayiltest.atlassian.net`)
 
 ![URL](/selfhosting/jira_url.png)
 
@@ -93,7 +93,7 @@ Various details generated during the setup process will need to be copied and pr
 
 ![Webhook 1](/selfhosting/jira_webhook1.png)
 
-2. Click webhook from the menu on the left and click Create a Webhook.
+2. Click Webhook from the menu on the left and click Create a Webhook.
 
 3. Enter `mayil-wh-1` under name.
 
@@ -101,7 +101,7 @@ Various details generated during the setup process will need to be copied and pr
 
 5. Under URL, enter `<deploment>/api/webhook/jira/` where deployment is where Mayil's backend API was deployed (An example would be `https://mayil.companyname/api/webhook/jira/`)
 
-6. Set a secret and update `webhook_secret` in the configuation details from the previous step
+6. Set a secret and update `webhook_secret` in the configuration details from the previous step
 
 7. Add these Events-
 
@@ -112,6 +112,6 @@ Various details generated during the setup process will need to be copied and pr
 ---
 
 
-This completes the Jira setup. A successfull setup will be indicated in the health page (`<deploment>/api/health`)
+This completes the Jira setup. A successful setup will be indicated on the health page (`<deploment>/api/health`)
 
 

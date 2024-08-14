@@ -3,13 +3,13 @@ title: "Installing Mayil AI with Helm"
 sidebarTitle: "Helm"
 ---
 
-Helm uses a packaging format called charts. A chart is a collection of files that describe a related set of Kubernetes resources. Talk to us get a custom made chart to install Mayil (with configuration details unique to your installation).
+Helm uses a packaging format called charts. A chart is a collection of files that describe a related set of Kubernetes resources. Talk to us to get a custom-made chart to install Mayil (with configuration details unique to your installation).
 
 
 ## Prerequisites
 
 1. [Install Helm CLI](https://helm.sh/docs/intro/install/)
-2. Create a Kubernetes cluster and setup Kubectl to that cluster
+2. Create a Kubernetes cluster and set Kubectl to that cluster
 3. A subdomain to host Mayil
 3. Receive a custom Helm chart from us
 
@@ -41,7 +41,7 @@ helm install cert-manager jetstack/cert-manager --namespace default --version v1
 
 ## Configuring Helm
 
-You should have received a zip file from us containing a `.tgz` file. This is the helm chart. And a `values.yaml` with configuation options for Helm. Update these values-
+You should have received a zip file from us containing a `.tgz` file. This is the helm chart. And a `values.yaml` with configuration options for Helm. Update these values-
 
 1. `ingress.hosts.host`- The subdomain where Mayil will be hosted such as `mayil.companyname.com`
 2. `envVars.LINK_TO_MAYIL` - The same subdomain as in `ingress.hosts.host`
@@ -56,7 +56,7 @@ You should have received a zip file from us containing a `.tgz` file. This is th
 helm install mayil <path to helm chart> -f values.yaml
 ```
 
-The helm chart should be in the installation package you receives as a `.tgz` file.
+The helm chart should be in the installation package you receive as a `.tgz` file.
 
 ## Check cluster status
 
@@ -66,7 +66,7 @@ Investigate all the pods are running with-
 kubectl get pods
 ```
 
-A successfull intall should look like this-
+A successful install should look like this-
 
 ```
 kubectl get pods
