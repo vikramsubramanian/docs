@@ -8,7 +8,7 @@ Various integrations and resources need to be set up for Mayil to be fully funct
 ## Using Vault
 
 Vault should run on the base domain we deployed Mayil to in the previous step (such as `mayil.companyname.com`). When opened for the first time, you should see a login page like this-
-![Vault Login](./selfhosting/vaultlogin.png)
+![Vault Login](/selfhosting/vaultlogin.png)
 
 We will use the `username` method to login. Use `envVars.CLIENT_ID` and `envVars.CLIENT_SECRET` provided in `values.yaml` in the helm installation package you received from us. 
 
@@ -17,7 +17,7 @@ Please update this default username and password after logging in. Vault support
 
 Once logged-in, under `Secrets Engine`, open mayil ➤ data ➤ user_config. You should see something like this-
 
-![Edit Mayil's config](./selfhosting/vaultsecrets.png)
+![Edit Mayil's config](/selfhosting/vaultsecrets.png)
 
 This file contains all the configuation options for Mayil. When installing integrations, this file will have to be modified with details about that integration. Every time this file gets updated, Mayil will refresh. 
 
@@ -26,7 +26,7 @@ This file contains all the configuation options for Mayil. When installing integ
 
 Go to `<deployment>/api/health` (such as `https://mayil.companyname.com/api/health) to see the status of the configuration. Any errors in the config will also be listed there. When config is valid, you will see somehting like-
 
-![Valid Config](./selfhosting/validconfig.png)
+![Valid Config](/selfhosting/validconfig.png)
 
 
 ## Sample configurtion

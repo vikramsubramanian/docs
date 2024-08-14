@@ -1,0 +1,132 @@
+---
+title: "Setting up Open AI endpoints on Azure for Mayil"
+sidebarTitle: "OpenAI on Azure"
+---
+
+*Estimated setup time: 20 minutes*
+
+## Prerequisites
+
+This tutorial assumes you have an Azure account and have installed the Azure CLI app. Follow this tutorial to install the Azure CLI app- [here](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+
+Your azure account must have a Cognitive Services Contributor role assigned in order for you to agree to the responsible AI terms and create a resource- [Learn More](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/role-based-access-control)
+
+## Provision OpenAI resources on Azure
+
+This tutorial largely follows the steps outlined [here](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource?pivots=web-portal)
+
+1. Login to Azure
+
+```
+az login
+```
+
+2. Create a resource group for Mayil
+
+```
+az group create --name mayil-rg --location westus
+```
+
+Skip this step if already created during Kubernetes setup.
+
+3. Create a Congnitiveservices account specific to Mayil
+
+** West US **
+```
+az cognitiveservices account create --kind OpenAI --location eastus --name mayil-cs-eastus --resource-group mayil-rg --sku s0
+```
+
+
+We need to select a region based on availability of OpenAI models. East US is by far the most available regions. See [here](https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits)
+
+4. Deploy required models for Mayil
+
+
+** GPT40 **
+
+```
+az cognitiveservices account deployment create \
+--name mayil-cs-eastus \
+--resource-group  mayil-rg \
+--deployment-name GPT4O \
+--model-name gpt-4o \
+--model-version "2024-05-13"  \
+--model-format OpenAI
+```
+
+** Text-embedding-3-large **
+
+```
+az cognitiveservices account deployment create \
+--name mayil-cs-eastus \
+--resource-group  mayil-rg \
+--deployment-name embedding \
+--model-name text-embedding-3-large \
+--model-version "1"  \
+--model-format OpenAI
+```
+
+** GPT3 **
+
+```
+az cognitiveservices account deployment create \
+--name mayil-cs-eastus \
+--resource-group  mayil-rg \
+--deployment-name 35Turbo1106 \
+--model-name gpt-35-turbo \
+--model-version "1106"  \
+--model-format OpenAI
+```
+
+
+It is critical to set up all the listed models for a fully functioning Mayil. Pricing is based on usage and the number of instances spun up has no effect.
+
+## Configuring Mayil's backend API
+
+Various details generated during the setup process above will need to be copied and provided to Mayil's backend API as configuation details. Update the JSON block below with all the procured information. 
+
+```
+    "ENDPOINTS": [
+      {
+        "deployment": "GPT4O",
+        "deployment_type": "azure_oai",
+        "endpoint": "https://mayil-cs-eastus.openai.azure.com/",
+        "key": "GPT4O",
+        "token": "INSERT TOKEN"
+      },
+      {
+        "deployment": "embedding",
+        "deployment_type": "azure_oai",
+        "endpoint": "https://mayil-cs-eastus.openai.azure.com/",
+        "key": "EMBEDDING",
+        "token": "<INSERT TOKEN>"
+      },
+      {
+        "deployment": "35Turbo1106",
+        "deployment_type": "azure_oai",
+        "endpoint": "https://mayil-ai.openai.azure.com/",
+        "key": "GPT3",
+        "token": "<INSERT TOKEN>"
+      }
+    ],
+```
+
+
+
+If the variables names provided in the commands in the previous step were used as is, few modifications need to be made to the config.
+
+1. `deployment` - Enter the deployment-name used while creating the service in Azure
+2. `endpoint` - A link to the resource group we created - `https://<resource_group_name>.openai.azure.com/`
+3. `deployment_type` is always "azure_oai" for Azure OpenAI endpoints
+4. `key` - A identifier used by Mayil. Can be one of ["GPT4O", "EMBEDDING", "GPT3"]
+5.  `token` - Procure a bearer token  by running this command-
+
+```
+az cognitiveservices account keys list --name mayil-cs-eastus --resource-group mayil-rg
+```
+
+After populating the config details, add this config block to `ENDPOINTS` as outlined in the [Configuration](./configuration) page.
+
+## Access Control
+
+It is critical to manage access to these endpoints from a privacy and security point of view. It is strongly recomended that these endpoints be configured to only be accessible from a company only subnet. Details on how to do this is documented [here](https://learn.microsoft.com/en-us/azure/ai-services/cognitive-services-virtual-networks?tabs=azure-cli)
