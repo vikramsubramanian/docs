@@ -31,18 +31,17 @@ Skip this step if already created during Kubernetes setup.
 
 3. Create a Congnitiveservices account specific to Mayil
 
-** West US **
+
 ```
 az cognitiveservices account create --kind OpenAI --location eastus --name mayil-cs-eastus --resource-group mayil-rg --sku s0
 ```
 
-
-We need to select a region based on availability of OpenAI models. East US is by far the most available regions. See [here](https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits)
+We have selected the region based on availability of OpenAI models. See [here](https://learn.microsoft.com/en-us/azure/ai-services/openai/quotas-limits)
 
 4. Deploy required models for Mayil
 
 
-** GPT40 **
+**GPT40**
 
 ```
 az cognitiveservices account deployment create \
@@ -54,7 +53,7 @@ az cognitiveservices account deployment create \
 --model-format OpenAI
 ```
 
-** Text-embedding-3-large **
+**Text-embedding-3-large**
 
 ```
 az cognitiveservices account deployment create \
@@ -66,7 +65,7 @@ az cognitiveservices account deployment create \
 --model-format OpenAI
 ```
 
-** GPT3 **
+**GPT3**
 
 ```
 az cognitiveservices account deployment create \
