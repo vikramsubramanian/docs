@@ -9,3 +9,4 @@ Mayil consists of an API Backend and various integrations that work with the API
 1. **Installing the API Backend**- Mayil's API Backend is a Kubernetes application. It can be installed on any Kubernetes cluster either self-hosted or on the cloud.
 2. **Configuration**- Mayil's API Backend needs to know important details like where to run, what to process, how to access integrations, etc. This information needs to be provided through Vault, a secret management software Mayil uses.
 3. **Integrations**- Mayil interacts with the world through integrations. At the minimum, it needs access to an issue tracker and a code repository. Supported integrations need to be set up and linked to Mayil's API Backend.
+4. **Mapping**- One Mayil instance can run on just on repo and isse tracker or hundreds of repos and issue trackers at the same time. To enable Mayil to do this, you need to provide a mapping of repos to issue trackers. 

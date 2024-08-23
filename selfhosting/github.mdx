@@ -1,0 +1,90 @@
+---
+title: GitHub
+---
+
+## Installing Mayil's GitHub integration
+
+*Estimated setup time: 20 minutes*
+
+Mayil's GitHub integration is simple GitHub app. The general instructions to install a GitHub app is outlined [here](https://docs.github.com/en/apps/using-github-apps/installing-your-own-github-app)
+
+## Prerequisites
+
+Admin/Owner access to your company's GitHub organization. Or owner privileges to an individual repository. Mayil can run on just one repo or an entire organization. Provide access to all the repos you would like Mayil to process. 
+
+
+## Installing Mayil's GitHub app
+
+
+**Note:** GitHub is both an issue tracker and a code store. If your team uses GitHub issues, there are some additional steps you need to follow that are highlighted below.
+
+1. In the upper-right corner of any page on GitHub, click your profile photo.
+
+2. Navigate to your account settings.
+
+   - For an app owned by a personal account, click Settings.
+   - For an app owned by an organization:
+        - Click Your organizations and select the organization you want to install Mayil on.
+        - To the right of the organization, click Settings.
+3. In the left sidebar, click  Developer settings.
+4. In the left sidebar, click GitHub Apps.
+5. Click New Github App
+6. Provide these following detail
+
+ - GitHub App Name: Mayil-AI
+ - Homepage URL: https://www.mayil.ai/
+ - **Uncheck** the Expire user authorization tokens option
+
+![GitHub App options](/selfhosting/gh_1.png)
+
+7. If your team uses GitHub issues, 
+    - Activate webhooks and under Webhook URL, enter `<deploment>/api/webhook/github/` where deployment is where Mayil's backend API was deployed (An example would be `https://mayil.companyname/api/webhook/github/`)
+    - Enter a custom webhook secret
+
+![GitHub Webhook options](/selfhosting/gh_2.png)
+
+8. Provide these permissions-
+
+    1. Repository permissions ➤ Codespaces ➤ Read-only
+    2. Repository permissions ➤ Contents ➤ Read-only
+    3. Repository permissions ➤ Issues  ➤ Read and Write (Only If your team uses GitHub issues)
+    
+
+9. If your team uses GitHub issues, subscribe to these events-
+
+![GitHub App options](/selfhosting/gh_subscribe.png)
+
+10. Click Create GitHub app
+
+10. Upload the Mayil logo sent with the installation package under Display information 
+
+11. Generate a new private key and save it for later steps
+
+
+## Configuring Mayil’s backend API
+
+Various details generated during the setup process will need to be copied and provided to Mayil’s backend API as configuration details. Update this JSON block with all the procured information-
+
+```
+    {
+      "integration_type": "github",
+      "url": "https://github.com",
+      "organization_id": "",
+      "identifier": "6 digit ID",
+      "secret": "secret",
+      "webhook_secret": "anystring",
+      "valid_ids": []
+    },
+```
+
+1. Copy the apps `App ID` displayed in its overview page into `identifier`
+2. Run the following command to base64 encode the private key generated previously
+
+    ```
+    base64 < path/to/privatekey/pemfile
+    ```
+    and save the output in `secret`
+
+3. Enter the webhook_secret entered in the previous step into `webhook_secret`
+
+After updating these details, upload this data into Vault.
